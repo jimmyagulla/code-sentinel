@@ -1,0 +1,11 @@
+---
+description: UI layer rules
+globs: src/ui/**/*.ts,src/ui/**/*.tsx
+alwaysApply: true
+---
+
+# UI
+
+- Webview talks to extension host via `postMessage` only.
+- Use VS Code theme CSS variables in webview markup.
+- Commands call use cases from the `Container`, not adapters.

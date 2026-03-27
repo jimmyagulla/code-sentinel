@@ -1,0 +1,11 @@
+---
+description: Domain layer rules
+globs: src/domain/**/*.ts
+alwaysApply: true
+---
+
+# Domain
+
+- No async I/O. Pure logic and types.
+- No imports from application, adapters, ui, infrastructure.
+- Use branded types for IDs; validate invariants with `DomainError`.

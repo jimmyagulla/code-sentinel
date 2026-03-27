@@ -1,0 +1,14 @@
+{
+  "extends": "../../../tsconfig.webview.json",
+  "compilerOptions": {
+    "rootDir": "../.."
+  },
+  "include": [
+    "app/**/*",
+    "../../constants/**/*",
+    "../../application/dtos/NoteDto.ts",
+    "../../application/dtos/ProjectConfigDto.ts",
+    "../../application/dtos/notesPanelMessage.ts",
+    "../../domain/value-objects/FileStatusValue.ts"
+  ]
+}

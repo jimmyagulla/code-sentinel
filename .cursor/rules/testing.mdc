@@ -1,0 +1,10 @@
+---
+description: Testing conventions
+globs: test/**/*.test.ts
+alwaysApply: true
+---
+
+# Tests
+
+- Vitest for unit tests under `test/unit/`.
+- Domain: no mocks. Use cases: mock ports. Adapters: temp dirs / real git where practical.

@@ -1,0 +1,11 @@
+---
+description: Adapters layer rules
+globs: src/adapters/**/*.ts
+alwaysApply: true
+---
+
+# Adapters
+
+- Implement exactly one port; translate errors to domain-friendly failures.
+- Register new adapters in `src/infrastructure/di/Container.ts`.
+- Document in `docs/technical/adapters.md`.

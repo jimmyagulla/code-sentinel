@@ -1,0 +1,17 @@
+---
+description: Core architecture principles for CodeSentinel
+globs: src/**/*.ts
+alwaysApply: true
+---
+
+# CodeSentinel Architecture
+
+Clean / Hexagonal architecture with strict **Dependency Inversion**.
+
+1. **Domain** (`src/domain/`): zero imports of vscode, fs, simple-git, adapters.
+2. **Application** (`src/application/`): depends only on domain + port interfaces; use cases never import concrete adapters.
+3. **Adapters** (`src/adapters/`): implement ports; no cross-adapter imports; no `src/ui/`.
+4. **UI** (`src/ui/`): vscode + use cases + DTOs; never import adapters directly.
+5. **Infrastructure** (`src/infrastructure/`): DI container only composition root for wiring.
+
+New external capability → add a **port** first, then an **adapter**.

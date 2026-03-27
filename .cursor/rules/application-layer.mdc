@@ -1,0 +1,11 @@
+---
+description: Application layer rules
+globs: src/application/**/*.ts
+alwaysApply: true
+---
+
+# Application
+
+- Ports live in `src/application/ports/`.
+- Use cases: one class per use case, constructor-injected ports, `execute(input)`.
+- No vscode / adapter imports.

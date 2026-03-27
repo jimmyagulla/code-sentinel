@@ -1,0 +1,11 @@
+---
+description: TypeScript style
+globs: src/**/*.ts
+alwaysApply: true
+---
+
+# Style
+
+- `strict` TypeScript; avoid `any`.
+- Constructor injection; no service locators.
+- Prefer interfaces for DTOs and ports.

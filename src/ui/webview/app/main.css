@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CodeSentinel notes — design system (aligned with app DS, oklch + semantic tokens) */
+
+:root {
+  /* Surfaces — VS Code theme (webview); cards sit above the sidebar/editor canvas */
+  --background: var(--vscode-sideBar-background);
+  --foreground: var(--vscode-sideBar-foreground);
+  --card: var(--vscode-editorWidget-background);
+  --card-foreground: var(--vscode-editorWidget-foreground);
+  --popover: var(--vscode-editorWidget-background);
+  --popover-foreground: var(--vscode-editorWidget-foreground);
+
+  /* Brand */
+  --primary: oklch(0.6132 0.2294 291.7437);
+  --primary-foreground: oklch(1 0 0);
+
+  /* Neutrals */
+  --secondary: var(--vscode-button-secondaryBackground);
+  --secondary-foreground: var(--vscode-button-secondaryForeground);
+  --muted: var(--vscode-list-hoverBackground);
+  --muted-foreground: var(--vscode-descriptionForeground);
+  --accent: var(--vscode-toolbar-hoverBackground);
+  --accent-foreground: var(--vscode-sideBar-foreground);
+
+  /* Semantic status */
+  --destructive: oklch(0.629 0.1902 23.0704);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.55 0.16 155);
+  --success-foreground: oklch(0.99 0 0);
+  --alert: oklch(0.56 0.18 55);
+  --alert-foreground: oklch(0.99 0 0);
+  --info: oklch(0.55 0.2 250);
+  --info-foreground: oklch(0.99 0 0);
+
+  /* Borders & inputs */
+  --border: var(--vscode-sideBar-border);
+  --input: var(--vscode-input-background);
+  --ring: var(--vscode-focusBorder);
+
+  /* Charts */
+  --chart-1: oklch(0.7459 0.1483 156.4499);
+  --chart-2: oklch(0.5393 0.2713 286.7462);
+  --chart-3: oklch(0.7336 0.1758 50.5517);
+  --chart-4: oklch(0.5828 0.1809 259.7276);
+  --chart-5: oklch(0.559 0 0);
+
+  /* Sidebar (list chrome) — align with VS Code side bar */
+  --sidebar: var(--vscode-sideBar-background);
+  --sidebar-foreground: var(--vscode-sideBar-foreground);
+  --sidebar-primary: var(--vscode-sideBar-foreground);
+  --sidebar-primary-foreground: var(--vscode-sideBar-background);
+  --sidebar-accent: var(--vscode-list-hoverBackground);
+  --sidebar-accent-foreground: var(--vscode-sideBar-foreground);
+  --sidebar-border: var(--vscode-sideBar-border);
+  --sidebar-ring: var(--vscode-focusBorder);
+
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-serif: ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, monospace;
+
+  /* Radius (design system) */
+  --radius: 1.4rem;
+
+  /* Shadows */
+  --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 10.1961% / 0.08);
+  --shadow-xs: 0px 2px 3px 0px hsl(0 0% 10.1961% / 0.08);
+  --shadow-sm:
+    0px 2px 3px 0px hsl(0 0% 10.1961% / 0.16), 0px 1px 2px -1px hsl(0 0% 10.1961% / 0.16);
+  --shadow: 0px 2px 3px 0px hsl(0 0% 10.1961% / 0.16), 0px 1px 2px -1px hsl(0 0% 10.1961% / 0.16);
+  --shadow-md:
+    0px 2px 3px 0px hsl(0 0% 10.1961% / 0.16), 0px 2px 4px -1px hsl(0 0% 10.1961% / 0.16);
+  --shadow-lg:
+    0px 2px 3px 0px hsl(0 0% 10.1961% / 0.16), 0px 4px 6px -1px hsl(0 0% 10.1961% / 0.16);
+  --shadow-xl:
+    0px 2px 3px 0px hsl(0 0% 10.1961% / 0.16), 0px 8px 10px -1px hsl(0 0% 10.1961% / 0.16);
+  --shadow-2xl: 0px 2px 3px 0px hsl(0 0% 10.1961% / 0.4);
+
+  --tracking-normal: -0.025em;
+}
+
+.dark {
+  /* Surfaces follow VS Code theme (same variables as :root; theme switches via VS Code) */
+  --background: var(--vscode-sideBar-background);
+  --foreground: var(--vscode-sideBar-foreground);
+  --card: var(--vscode-editorWidget-background);
+  --card-foreground: var(--vscode-editorWidget-foreground);
+  --popover: var(--vscode-editorWidget-background);
+  --popover-foreground: var(--vscode-editorWidget-foreground);
+
+  --primary: oklch(0.6132 0.2294 291.7437);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: var(--vscode-button-secondaryBackground);
+  --secondary-foreground: var(--vscode-button-secondaryForeground);
+  --muted: var(--vscode-list-hoverBackground);
+  --muted-foreground: var(--vscode-descriptionForeground);
+  --accent: var(--vscode-toolbar-hoverBackground);
+  --accent-foreground: var(--vscode-sideBar-foreground);
+
+  --destructive: oklch(0.7106 0.1661 22.2162);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.65 0.17 155);
+  --success-foreground: oklch(0.13 0.01 270);
+  --alert: oklch(0.75 0.15 55);
+  --alert-foreground: oklch(0.13 0.01 55);
+  --info: oklch(0.65 0.16 250);
+  --info-foreground: oklch(0.13 0.01 250);
+
+  --border: var(--vscode-sideBar-border);
+  --input: var(--vscode-input-background);
+  --ring: var(--vscode-focusBorder);
+
+  --chart-1: oklch(0.8003 0.1821 151.711);
+  --chart-2: oklch(0.6132 0.2294 291.7437);
+  --chart-3: oklch(0.8077 0.1035 19.5706);
+  --chart-4: oklch(0.6691 0.1569 260.1063);
+  --chart-5: oklch(0.7058 0 0);
+
+  --sidebar: var(--vscode-sideBar-background);
+  --sidebar-foreground: var(--vscode-sideBar-foreground);
+  --sidebar-primary: var(--vscode-sideBar-foreground);
+  --sidebar-primary-foreground: var(--vscode-sideBar-background);
+  --sidebar-accent: var(--vscode-list-hoverBackground);
+  --sidebar-accent-foreground: var(--vscode-sideBar-foreground);
+  --sidebar-border: var(--vscode-sideBar-border);
+  --sidebar-ring: var(--vscode-focusBorder);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  html {
+    height: 100%;
+    width: 100%;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+  }
+  html,
+  body {
+    @apply bg-background text-foreground antialiased;
+    letter-spacing: var(--tracking-normal);
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  #root {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Explorer “current file” notes view: edge-to-edge (no host padding bleed) */
+  body[data-notes-scope='current-file'] #root {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

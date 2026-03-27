@@ -1,0 +1,216 @@
+{
+  "name": "codesentinel",
+  "displayName": "CodeSentinel",
+  "description": "Structured code notes, file health tracking, Git-versioned storage",
+  "version": "0.1.0",
+  "publisher": "codesentinel",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jimmyagulla/code-sentinel.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codesentinel.createNote",
+        "title": "CodeSentinel: Create Note",
+        "shortTitle": "Add Note",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "codesentinel.deleteNote",
+        "title": "CodeSentinel: Delete Note"
+      },
+      {
+        "command": "codesentinel.markFileOk",
+        "title": "CodeSentinel: Mark File OK"
+      },
+      {
+        "command": "codesentinel.markFileKo",
+        "title": "CodeSentinel: Mark File KO"
+      },
+      {
+        "command": "codesentinel.markFileNeedsReview",
+        "title": "CodeSentinel: Mark File Needs Review"
+      },
+      {
+        "command": "codesentinel.pickFileStatus",
+        "title": "CodeSentinel: Set File Status…",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "codesentinel.openPanel",
+        "title": "CodeSentinel: Open Notes",
+        "icon": "$(list-tree)"
+      },
+      {
+        "command": "codesentinel.refresh",
+        "title": "CodeSentinel: Refresh / Reconcile"
+      },
+      {
+        "command": "codesentinel.initialize",
+        "title": "CodeSentinel: Initialize Workspace"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "codesentinel.createNote",
+          "when": "editorTextFocus && editorHasSelection && resourceScheme == file && codesentinel.enabled",
+          "group": "navigation@91"
+        },
+        {
+          "command": "codesentinel.pickFileStatus",
+          "when": "editorTextFocus && resourceScheme == file && codesentinel.enabled",
+          "group": "navigation@92"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "codesentinel.createNote",
+          "when": "editorHasSelection && resourceScheme == file && codesentinel.enabled",
+          "group": "codesentinel@1"
+        },
+        {
+          "command": "codesentinel.pickFileStatus",
+          "when": "resourceScheme == file && codesentinel.enabled",
+          "group": "codesentinel@2"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "codesentinel.currentFileNotes",
+          "name": "CodeSentinel (this file)",
+          "when": "codesentinel.enabled",
+          "type": "webview"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "CodeSentinel",
+      "properties": {
+        "codesentinel.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable CodeSentinel"
+        },
+        "codesentinel.storagePath": {
+          "type": "string",
+          "default": ".codesentinel",
+          "description": "Storage folder relative to workspace root"
+        },
+        "codesentinel.autoReconcileOnOpen": {
+          "type": "boolean",
+          "default": true
+        },
+        "codesentinel.reconcileDebounceMs": {
+          "type": "number",
+          "default": 2000
+        },
+        "codesentinel.anchorSearchRadius": {
+          "type": "number",
+          "default": 30
+        },
+        "codesentinel.anchorFuzzyThreshold": {
+          "type": "number",
+          "default": 0.3
+        },
+        "codesentinel.showGutterIcons": {
+          "type": "boolean",
+          "default": true
+        },
+        "codesentinel.showHoverTooltips": {
+          "type": "boolean",
+          "default": true
+        },
+        "codesentinel.showSelectionCodeLens": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show an Add note CodeLens on the first line when text is selected. The Copilot/inline-chat floating bar is not extensible by third-party extensions."
+        },
+        "codesentinel.fileStatus.defaultStatus": {
+          "type": "string",
+          "enum": [
+            "OK",
+            "NEEDS_REVIEW",
+            "KO"
+          ],
+          "default": "NEEDS_REVIEW"
+        },
+        "codesentinel.fileStatus.excludePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "*.test.ts",
+            "*.spec.ts",
+            "*.d.ts",
+            "dist/**",
+            "node_modules/**"
+          ]
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.config.mjs",
+    "compile:webview": "node esbuild.webview.config.mjs && tailwindcss -c tailwind.config.cjs -i ./src/ui/webview/app/main.css -o ./dist/webview/main.css --minify",
+    "build": "pnpm run compile && pnpm run compile:webview",
+    "watch": "node esbuild.config.mjs --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\" \"test/**/*.ts\"",
+    "vscode:prepublish": "pnpm run build",
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "@vscode/test-electron": "^2.3.9",
+    "@vscode/vsce": "^2.22.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "esbuild": "^0.20.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "lucide-react": "^1.7.0",
+    "postcss": "^8.4.38",
+    "prettier": "^3.2.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.72.0",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2",
+    "zod": "^4.3.6",
+    "zustand": "^5.0.12"
+  },
+  "dependencies": {
+    "simple-git": "^3.22.0"
+  }
+}
